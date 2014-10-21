@@ -1,0 +1,8 @@
+name    	'puppet-ansible'
+version 	'1.0.0'
+source 		'Github'
+author 		'Jan Collijs'
+license 	'GPL'
+summary 	'This module manages ansible as orchestration tool through puppetdb'
+description 	'Using this module ansible will be installed and configured to use as an orchestration tool through puppetdb'
+project_page 	'https://github.ugent.be/Universiteitsbibliotheek/pm_ansible'
