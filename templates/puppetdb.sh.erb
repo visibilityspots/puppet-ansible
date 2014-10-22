@@ -1,18 +1,22 @@
 #!/bin/bash
 #
+# This script is managed by PUPPET!
+#
 # Script which can be used as an ansible dynamic inventory using the puppetdb API
 #
 # Source: https://github.com/visibilityspots/ansible-puppet-inventory
-# DECLARE PARAMETERS
 
+# DECLARE PARAMETERS
+ROOT_DIR='/etc/ansible/'
 PUPPETDBHOST='<%= scope.lookupvar('ansible::puppetdb_host') %>:<%= scope.lookupvar('ansible::puppetdb_port') %>'
 HOSTS='\n'
-ENVIRONMENTS=`ls environments | wc -l`
+TOTAL_ENVIRONMENTS=`ls $ROOT_DIR/environments | wc -l`
+ENVIRONMENTS=$ROOT_DIR/environments/*
 
 # LOOP THROUGH QUERIES AND STORE THE FOUND NODES INTO THE $HOSTS VARIABLE
-for ENVIRONMENT in environments/*
+for ENVIRONMENT in $ENVIRONMENTS
 do
-        ENV=`echo $ENVIRONMENT | awk -F "/" '{print $2}'`
+        ENV=`echo $ENVIRONMENT | awk -F "/" '{print $NF}'`
         HOSTS="${HOSTS}\t\"$ENV\": ["
         FIRST_HOST="true"
 
@@ -26,11 +30,11 @@ do
           else
             HOSTS="${HOSTS}, \"${hostname}\""
           fi
-  done < <(curl --silent -X GET http://$PUPPETDBHOST/v4/nodes --data-urlencode query@$ENVIRONMENT | grep certname | grep <%= scope.lookupvar('ansible::domain') %> | awk -F "\"" '{print $4}')
+  done < <(curl --silent -X GET http://$PUPPETDBHOST/v4/nodes --data-urlencode query@$ENVIRONMENT | grep certname | grep <%= scope.lookupvar('ansible::domain') %> | awk -F "\"" '{print $(NF-1)}')
 
         # FIX FOR THE PARSE ERROR WHEN A COMMA IS FOUND AFTER LAST LIST OF NODES
         i=$(expr $i + 1)
-        if [ $i == $ENVIRONMENTS ]; then
+        if [ $i == $TOTAL_ENVIRONMENTS ]; then
                 HOSTS="${HOSTS} ]\n"
         else
                 HOSTS="${HOSTS} ],\n"
