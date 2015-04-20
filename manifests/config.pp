@@ -11,7 +11,7 @@ class ansible::config {
 
   if $ansible::puppet_inventory {
     file { '/etc/ansible/hosts':
-      mode    => '0655',
+      mode    => '0755',
       replace => true,
       content => template('ansible/inventory.py.erb'),
     }
