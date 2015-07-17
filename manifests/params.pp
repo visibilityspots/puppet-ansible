@@ -6,7 +6,7 @@ class ansible::params {
   $pkg_name         = 'ansible'
   $pkg_version      = 'installed'
   $remote_port      = '22'
-  $puppetdb_host    = 'puppetdb2.internal.inuits.eu'
+  $puppetdb_host    = hiera('puppetdb_host')
   $domain           = '\'.*\''
   $puppet_inventory = true
 }
