@@ -8,11 +8,13 @@ Tested on a CentOS 6.5 machine using puppet 3.7.1, puppetdb 2.2 and ansible 1.7
 
 include ansible
 
+```puppet
 class { 'ansible':
 	puppetdb_host    => 'PUPPETDBHOST',
 	puppetdb_port    => 'PUPPETDBPORT',
 	puppet_inventory => true,
 }
+```
 
 ## /etc/ansible/hosts
 
