@@ -6,7 +6,6 @@ class ansible (
   $pkg_version      = $ansible::params::pkg_version,
   $remote_port      = $ansible::params::remote_port,
   $puppetdb_host    = $ansible::params::puppetdb_host,
-  $puppetdb_port    = $ansible::params::puppetdb_port,
   $domain           = $ansible::params::domain,
   $puppet_inventory = $ansible::params::puppet_inventory,
 ) inherits ansible::params {

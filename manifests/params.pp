@@ -6,8 +6,7 @@ class ansible::params {
   $pkg_name         = 'ansible'
   $pkg_version      = 'installed'
   $remote_port      = '22'
-  $puppetdb_host    = undef
-  $puppetdb_port    = undef
+  $puppetdb_host    = 'puppetdb'
   $domain           = '\'.*\''
   $puppet_inventory = false
 }
