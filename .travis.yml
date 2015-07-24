@@ -5,7 +5,7 @@ install:
   - gem install package_cloud fpm
 
 rvm:
-  - 1.9.2
+  - 1.9.3
 
 env:
   - PUPPET_VERSION=3.7.5
