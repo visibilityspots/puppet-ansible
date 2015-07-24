@@ -1,4 +1,4 @@
-# puppet-ansible module
+# puppet-ansible module [![Build Status](https://travis-ci.org/visibilityspots/puppet-ansible.svg?branch=master)](https://travis-ci.org/visibilityspots/puppet-ansible)
 
 This module is intented to use ansible as an orchestration tool within an existing puppet environment based on puppetdb. It relies on the epel repository which you have to manage yourselves.
 
