@@ -1,23 +1,20 @@
+---
 sudo: false
-
-before_install:
-  - ln -s . ansible
-
-cache:
-  - apt
-  - bundler
-
-addons:
-  apt:
-    packages:
-    - rpm
-
-rvm:
-  - 1.9.3
-
-script:
-  - curl -s https://raw.githubusercontent.com/visibilityspots/ci-scripts/master/travis/puppet-module.sh | bash -s ansible development
-
+language: ruby
+bundler_args: --without system_tests
+script: "bundle exec rake validate lint spec SPEC_OPTS='--format documentation'"
+matrix:
+  fast_finish: true
+  include:
+  - rvm: 1.8.7
+    env: PUPPET_GEM_VERSION="~> 3.0"
+  - rvm: 1.9.3
+    env: PUPPET_GEM_VERSION="~> 3.0"
+  - rvm: 2.1.5
+    env: PUPPET_GEM_VERSION="~> 3.0"
+  - rvm: 2.1.5
+    env: PUPPET_GEM_VERSION="~> 3.0" FUTURE_PARSER="yes"
+  - rvm: 2.1.6
+    env: PUPPET_GEM_VERSION="~> 4.0" STRICT_VARIABLES="yes"
 notifications:
-  email:
-    - travis@visibilityspots.com
+  email: travis@visibilityspots.com
